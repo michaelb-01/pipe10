@@ -1,0 +1,22 @@
+<div class="todo-wrapper">
+  <mat-checkbox [(ngModel)]="todo.done" (click)="toggleDone()">
+  </mat-checkbox>
+
+  <div *ngIf="!todo.editing" class="todo-label">
+    {{todo.text}}
+  </div>
+
+  <div *ngIf="todo.editing" class="todo-label-input">
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="todo.text" name="text" matTextareaAutosize class="todo-label-textarea"></textarea>
+    </mat-form-field>
+    <!-- <button mat-button>Click me!</button> -->
+    <div class="todo-icons">
+      <i class="material-icons todo-done">done</i>
+      <i class="material-icons todo-delete">delete</i>
+    </div>
+  </div>
+
+  
+</div>
+            

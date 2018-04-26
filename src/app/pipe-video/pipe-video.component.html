@@ -1,0 +1,91 @@
+<video #pipeVideo id="vid" 
+        (timeupdate)="updateSeekbar($event)"
+        (loadedmetadata)="videoLoaded($event)"
+        width="100%" 
+        height="100%" 
+        [src]="relUrl"
+        type="video/mp4" 
+        loop>
+</video>
+
+<!-- <video width="420" height="345" [src]="relUrl"></video> -->
+
+<div class="controls">
+  <div class="playButtonWrapper">
+    <div class="playButton" 
+      [ngClass]="{pause:_reviewService.playing}"
+      (click)="togglePlay()">
+    </div>
+  </div>
+
+  <div class="time">
+    {{_reviewService.frame}}
+  </div>
+
+<!--   <div class="time">
+    {{_reviewService.frame}}
+  </div> -->
+
+  <div class="seekBarWrapper">
+
+
+    <div class="commentMarkerContainer">
+      <div *ngFor="let comment of version?.comments"
+          class="commentMarker"
+          (click)="commentClick(comment)"
+          [ngStyle]="{'left': 100*((comment.frame-1) / (this.numFrames-1)) + '%'}">
+      </div>
+    </div>
+
+<!--     <div class="slider">
+      <div class="slider-fill" [style.width.%]="seek"></div>
+      <div class="slider-thumb" [style.left.%]="seek"></div>
+    </div> -->
+
+    <mat-slider style="width: 100%;"
+      value="{{_reviewService.frame}}" 
+      step="1"
+      min="1"
+      max="{{numFrames}}"
+      thumb-label="true"
+      (input)="updateTime($event)"
+      (mousemove)="seekbarClick($event)">
+    </mat-slider>
+
+    <div #seekBar class="seekBarHover">
+      <app-thumbnail [thumbUrl]="version?.thumbUrl" [seek]="seek*100" class="thumbViewer" [style.left.%]="seek*100">
+      </app-thumbnail>
+
+      <div class="hoverFrame" [style.left.%]="seek*100">{{(seek * numFrames) | round}}</div>
+    </div>
+<!--     <div class="range">
+      <input #seekBar type="range" 
+                      class="seekBar" 
+                      value="1" 
+                      step="1"
+                      min="1"
+                      max="{{numFrames}}"
+                      onkeydown="return false;"
+        (mouseenter)="hovering=true"
+        (mouseleave)="hovering=false"
+        (change)="updateTime($event)">
+    </div> -->
+  </div>
+
+  <div class="volumeControl">
+    <div class="volumeBar" *ngFor="let number of [0,1,2,3,4]; let i = index"
+          [ngClass]="{'full': i < selectedBar}"
+          [ngClass]="{'fill': selectedBar == i}"
+          [ngStyle]="{'box-shadow':'inset ' + volumeBarInset * (i==selectedBar) + 'px 0 #ff4081'}"
+          (mousedown)="volumeBarMouseDown($event,i)"
+          (mouseup)="editingVolume = false"
+          (mousemove)="volumeBarInsetFunc($event,i)"
+    ></div>
+  </div>
+
+  <div class="fullscreen" (click)="fullscreen()">
+    <i class="material-icons">fullscreen</i>
+  </div>
+</div>
+
+

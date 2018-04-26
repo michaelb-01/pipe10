@@ -1,0 +1,74 @@
+:host, .annotationWrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.annotationContainer {
+  position: relative;
+  width:100%; 
+  height:100%; 
+  z-index: 1;
+}
+.annotation {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  margin-top: -5px;
+  background-clip: content-box;
+  padding: 1px;
+  border: 1px solid white;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  z-index: 2;
+}
+.annotationText {
+  position: relative;
+  width: 150px;
+  background-color:white;
+  box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.2);
+  border-radius: 3px;
+  padding:10px 5px 6px 5px;
+}
+.annotationTextInput {
+  width: 150px;
+}
+.annotationDelete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 14px;
+  padding: 4px;
+  color: #ccc;
+  &:hover {
+    color: red;
+  }
+}
+.line {
+  pointer-events:none;
+  width: 20px;
+  height: 1px;
+  margin-top: 2px;
+  margin-left: 3px;
+  transform-origin: 0 0;
+  transform: rotate(28deg);
+  background-color: white;
+}
+
+.saveButton {
+
+}
+
+.chip {
+    background-color: #2172d4;
+    display: inline-block;
+    color: white;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+/deep/ .mat-raised-button {
+  min-width: 60px !important;
+  line-height: 28px !important;
+}

@@ -1,0 +1,55 @@
+<form class="form-container" (ngSubmit)="onSubmit()" #entityForm="ngForm">
+  <div class="form-wrapper">
+
+    <h1 class='form-title'>{{method}} Entity</h1>
+    <h2 class='form-title'>- {{entity.job.jobName}} -</h2>
+
+<!--     <mat-form-field class="example-full-width">
+      <input matInput [(ngModel)]="entity.job.jobName" name="jobName" disabled>
+    </mat-form-field>
+ -->
+    <mat-form-field>
+      <mat-select placeholder="Type" [(ngModel)]="entity.type" name="type" required>
+        <mat-option value="asset">Asset</mat-option>
+        <mat-option value="shot">Shot</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="entity.type=='asset'">
+      <input matInput placeholder="Name" [(ngModel)]="entity.name" name="name" required>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="entity.type=='shot'">
+      <input matInput placeholder="Name" type="number" min="1" [(ngModel)]="entity.name" name="name2" required>
+    </mat-form-field>
+    <span>sh{{entity.name | zeroPad:4}}</span>
+
+    <mat-form-field>
+      <mat-select placeholder="Status" class="fullWidth" [(ngModel)]='entity.status' name="status">
+        <mat-option *ngFor="let status of statuses" [value]="status.value">
+          {{ status.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <app-file-upload></app-file-upload>
+
+    <mat-form-field>
+      <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="2"
+                matAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+
+    <div class='submitButtonWrapper'>
+      <button mat-raised-button [disabled]="!entityForm.form.valid" color="primary" type="submit" class="submitButton">
+        {{method}} Entity
+      </button>
+    </div>
+
+    <div *ngIf="method=='Edit'" class='submitButtonWrapper'>
+      <button mat-raised-button color="warn" type="button" class="submitButton" (click)="confirmDeleteEntity($event)">
+        Delete Entity
+      </button>
+    </div>
+
+  </div>
+</form>

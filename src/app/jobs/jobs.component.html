@@ -1,0 +1,30 @@
+<mat-sidenav-container class="container">
+<!--   <div class="toolbar">
+    <mat-form-field class="filter">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput #searchQuery type="text" placeholder="Search" [(ngModel)]="filter"/>
+      <button mat-button *ngIf="filter" matSuffix mat-icon-button aria-label="Clear" (click)="filter=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div> -->
+
+  <!-- <div class="job" *ngFor="let job of jobs | async | filter : searchQuery.value"> -->
+
+  <div class="jobs-container">
+    <div class="job" *ngFor="let job of jobs | async">
+      <app-thumbnail #thumbnail [thumbUrl]="job.thumbUrl">
+        <div class="banner fade">
+          <a [routerLink]="['/job', job._id._str]">
+            <h1 class="cardTitle">{{job.client}}</h1>
+            <h3 class="cardTag">{{job.name}}</h3>
+          </a>
+        </div>
+      </app-thumbnail>
+    </div>
+  </div>
+
+  <mat-sidenav #sidenavRight class="sidenav2" align="end">
+    <app-job-form></app-job-form>
+  </mat-sidenav> 
+</mat-sidenav-container>

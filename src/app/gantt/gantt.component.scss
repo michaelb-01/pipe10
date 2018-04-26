@@ -1,0 +1,71 @@
+@import "../../variables";
+
+//$pimary-color: #2d3e52;
+$sidebarwidth: 150px;
+
+.button {
+  z-index: 100;
+  position: relative;
+  color: black;
+}
+
+.container {
+  position: absolute;
+  top:0;
+  left:0;
+  height:100%;
+  background-color:$pimary;
+  .header {
+    margin-left: $sidebarwidth;
+    white-space: nowrap;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+}
+
+.verticalLine {
+  width: 1px; 
+  height: 100%;
+  position: absolute;
+  border-left: 1px solid $pimary-light;
+}
+
+.monthLabel {
+  padding: 5px 0px;
+  &:first-child {
+    float: left;
+  }
+}
+
+.daysList {
+  display:flex;
+  .dayLabel {
+    display: inline-block;
+    font-size: 9px;
+  }
+}
+
+.userRow {
+  position: relative;
+  height: 40px;
+  margin: 5px 0;
+  line-height: 30px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  .user {
+    position: absolute;
+    top:0;
+    left:0;
+    width: $sidebarwidth;
+    z-index:10;
+    font-size:14px;
+    background-color:$pimary;
+    .userInner {
+      padding: 0 5px 5px 5px;
+    }
+  }
+  .jobRow {
+    margin-left: $sidebarwidth;
+    position: absolute;
+    top:0;
+    left:0;
+  }
+}

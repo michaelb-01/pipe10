@@ -1,0 +1,52 @@
+// Variables
+//@import "variables";
+
+$header-height: 40px;
+$padding: 5px;
+$avatar: $header-height - ($padding*2);
+
+:host {
+  width: 25%;
+  background-color: white;
+}
+
+.version-container {
+  padding: 5px;
+}
+
+.version-wrapper {
+  box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.2);
+  & > * {
+    padding: $padding;
+  }
+}
+
+.version-header {
+  position: relative;
+  height: $header-height;
+  .avatar {
+    position: absolute;
+    width: $avatar;
+    height: $avatar;
+    line-height: $avatar;
+    text-align: center;
+    background-color:pink;
+    border-radius: 50%;
+  }
+  .titleGroup {
+    position:absolute;
+    left: $header-height;
+    .title, .subtitle {
+      line-height: $avatar / 2;
+    }
+  }
+}
+
+.version-image {
+  background-color: green;
+  padding: 0px !important;
+}
+
+.version-footer {
+  width: 100%;
+}

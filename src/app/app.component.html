@@ -1,0 +1,47 @@
+<!-- <div  class="topnav"></div> -->
+
+<div class="wrapper" [ngClass]="{dark: dark}">
+  <!-- LEFT -->
+  <div id="topnav">
+    <div class="hamburger-menu" [ngClass]="{open: sidenavLeft.opened}" (click)="sidenavLeft.toggle()">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- CENTER -->
+    <ul id="topnav-list">
+      <li>
+        <a [routerLink]="['/jobs']">Jobs</a>
+      </li>
+      <li>
+        <a [routerLink]="['/mytasks']">My Tasks</a>
+      </li>
+      <li>
+        <a [routerLink]="['/planner']">Planner</a>
+      </li>
+    </ul>
+
+    <!-- RIGHT -->
+    <div mat-mini-fab color="primary" id="create-button" matTooltip={{tooltip}} [matTooltipPosition]="'left'" (click)="sidenavRightToggle()">
+      <!-- <i class="material-icons">create</i> -->
+
+    </div>
+  </div>
+
+  <mat-sidenav-container class="container">
+    <mat-sidenav #sidenavLeft class="sidenav" align="start" mode="side">
+      <app-sidebar-left></app-sidebar-left>
+    </mat-sidenav>
+
+<!--     <mat-sidenav #sidenavRight class="sidenav2" align="end">
+      <app-entity-form *ngIf="showEntityForm"></app-entity-form>
+      <app-job-form *ngIf="!showEntityForm"></app-job-form>
+    </mat-sidenav> -->
+
+    <router-outlet></router-outlet>
+  </mat-sidenav-container>
+</div>
+
+

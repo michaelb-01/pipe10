@@ -1,0 +1,229 @@
+$controlsHeight: 40px;
+$size: 20px;
+
+$margin: 10px;
+$bar-ratio: 0.2; /* percentage of width that is taken up by the middle bar */
+$color: #8f93a2;
+$animation-time: 0.3s;
+
+.controls {
+  display: flex;
+  position: absolute;
+  bottom: -$controlsHeight;
+  height: $controlsHeight;
+  width: 100%;
+  background-color: #272a38;
+  //outline: 1px solid #f7f7f7;
+  z-index: 2000;
+  color: $color;
+}
+
+.playButtonWrapper {
+  width: $controlsHeight;
+  border-right: 1px solid $color;
+}
+
+.playButton {
+  position: absolute;
+  width: $size; 
+  height: $size;
+  margin: $margin;
+  z-index:1000;
+  cursor: pointer;
+  
+  &::before, &::after { /* Play state */
+    content: "";
+    position: absolute;
+    left: 0; top: 50%; transform: translateY(-50%);
+    //height: 100%;
+    height: 50%;
+    border: 0px solid transparent;
+    border-width: $size*0.25 0 $size*0.25 $size*0.5;
+    border-left-color: $color;
+    
+    transition: all $animation-time ease;
+  }
+  &::after {
+    left: auto; right: 0;
+    height: 0%;
+  }
+  
+  &.pause { /* Pause state */
+    &::before, &::after {
+      border-left-width: $size*0.5;
+      height: 100%;
+      border-width: 0 0 0 ($size - $size*$bar-ratio)/2;
+    }
+  }
+}
+
+.time {
+  line-height: 40px;
+  width: 40px;
+  text-align: center;
+  border-right: 1px solid;
+}
+
+.seekBarWrapper {
+  cursor: pointer;
+  flex: 1;
+  position: relative;
+  &:hover {
+    & .thumbViewer {
+      opacity: 1;
+    }
+    & .seekBarHover {
+      opacity: 1;
+    }
+  }
+  .thumbViewer {
+    position: absolute;
+    pointer-events: none;
+    left: 0;
+    bottom: $controlsHeight;
+    width:160px;
+    height:90px;
+    margin-left:-80px;
+    background-color:black;
+    opacity:0;
+  }
+}
+
+.seekBarHover {
+  opacity: 0;
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 40px;
+}
+
+.hoverFrame {
+  position: absolute;
+  left: 0;
+  margin-left: -4px;
+  bottom: $controlsHeight;
+}
+
+.seekBar {
+  height: $controlsHeight;
+  margin: 0;
+  padding: 0;
+}
+
+.commentMarkerContainer {
+  left: 20px;
+  height: 100%;
+  position: absolute;
+  width: -webkit-calc(100% - 100px);
+  width: -moz-calc(100% - 100px);
+  width: calc(100% - 40px);
+}
+
+.commentMarker {
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  background-color: rgba(255,0,0,0.7);
+  top: -1px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 99;
+  &:hover {
+    transform: scale(1.2);
+    background-color: red;
+  }
+}
+
+.volumeControl {
+  width: 35px;
+  padding: 10px 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  .volumeBar {
+    width: 4px;
+    background-color: #666;
+    padding: 0 1px;
+    background-clip: content-box;
+    transition: height 0.2s ease;
+    &.full {
+      background-color: #ff4081;
+    }
+  }
+
+  @for $i from 1 through 5 {
+    .volumeBar:nth-last-child(#{$i}) {
+      //height: 80% / 5 * (6-$i);
+      $height: 100% / 5 * (6-$i);
+      height: $height;
+      &:hover {
+        height: $height + 20%;
+      }
+    }
+  }
+}
+
+.fullscreen {
+  color: #666;
+  cursor: pointer;
+  &:hover {
+    color: #ccc;
+  }
+  i {
+    line-height: 40px;
+    margin-right: 8px;
+  }
+}
+
+// THUMBNAIL //
+
+.thumbnailContainer {
+  display:block;
+  width:100%;
+  height:0;
+  overflow:hidden;
+  position:relative;
+}
+.thumbnailWrapper {
+  position:absolute;
+  pointer-events:none;
+  height:100%;
+}
+.thumbnail {
+  background-repeat: no-repeat;
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+}
+img {
+  pointer-events:none;
+  width:auto;
+  max-width:100000px;
+}
+
+.slider {
+  width: 100%;
+  height: 6px;
+  background-color: #b1b1b1;
+  border-radius: 4px;
+  margin-top: 17px;
+  .slider-fill {
+    height: 100%;
+    width: 50%;
+    background-color: red;
+    pointer-events: none;
+  }
+  .slider-thumb {
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #ff00d5;
+    left: 50%;
+    position: absolute;
+    margin-left: -10px;
+    margin-top: -13px;
+  }
+}

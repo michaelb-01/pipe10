@@ -1,0 +1,38 @@
+<!-- <li *ngFor="let entity of entities | async">
+  {{entity.tasks[0].entity.entityName}}
+</li> -->
+<div class="sidebarTitle">My Tasks</div>
+
+<div class="sidebarWrapper">
+  <li *ngFor="let entity of entities | async" class="entityContainer">
+    <a class="entityWrapper" [routerLink]="['/entity', entity.entity]">
+      <div class="thumbWrapper">
+        <app-thumbnail #thumbnail [thumbUrl]="entity.tasks[entity.taskNum || 0].thumbUrl">
+          <div class="banner fade">
+            <h1 class="cardTitle">{{entity.tasks[0].entity.entityName}}</h1>
+            <h3 class="cardTag">
+              <div *ngIf="entity.tasks.length <= 1">{{entity.tasks[entity.taskNum || 0].type}}</div>
+              <div *ngIf="entity.tasks.length > 1">&#9662;</div>              
+            </h3>
+          </div>
+        </app-thumbnail>
+      </div>
+
+      <div class="dueDateWrapper">
+        <div class="dueDate">
+          {{entity.tasks[entity.taskNum || 0].dueDate | amDateFormat:'LL'}}
+          <br>
+          <span class="dueDateIn">({{entity.tasks[entity.taskNum || 0].dueDate | amTimeAgo}})</span>
+        </div>
+      </div>
+    </a>
+
+    <div class="tasks">
+      <a *ngFor="let task of entity.tasks; index as i" 
+            [routerLink]="['/entity', task.entity.entityId._str, task.type]" 
+            class="taskExtraItem {{task.type | lowercase}}"
+            (mouseenter)="taskMouseEnter($event,entity,task,i)">{{task.type}}
+      </a>
+    </div>
+  </li>
+</div>

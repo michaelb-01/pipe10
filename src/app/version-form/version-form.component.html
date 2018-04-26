@@ -1,0 +1,35 @@
+<form class="form-container" (ngSubmit)="onSubmit(versionForm)" #versionForm="ngForm">
+  <div class="form-wrapper">
+
+<!--     <h1 class='form-title'>Create Entity</h1>
+    <h2 class='form-title'>{{entity.job.jobName}}</h2>
+
+    <mat-form-field>
+      <mat-select placeholder="Type" [(ngModel)]="entity.type" name="type" required>
+        <mat-option value="asset">Asset</mat-option>
+        <mat-option value="shot">Shot</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Name" [(ngModel)]="entity.name" name="name" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Status" class="fullWidth" [(ngModel)]='entity.status' name="status">
+        <mat-option *ngFor="let status of statuses" [value]="status.value">
+          {{ status.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <app-file-upload></app-file-upload> -->
+
+    <div class='submitButtonWrapper'>
+      <button mat-raised-button [disabled]="!versionForm.form.valid" color="primary" type="submit" class="submitButton">
+        Create Job
+      </button>
+    </div>
+
+  </div>
+</form>

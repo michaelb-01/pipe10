@@ -1,0 +1,28 @@
+<div class="annotation"
+  [ngStyle]="{'top': annotation.y + '%', 'left': annotation.x + '%'}"
+  (mousedown)="annotationMouseDown(annotation)"
+  (mouseup)="annotationMouseUp(annotation)">
+
+  <div class="line" [ngStyle]="{'width': annotation.lineLen + 'px',
+                                'transform': 'rotate(' + annotation.lineRot + 'deg)'}"></div>
+
+  <div class="annotationText" 
+      (mousedown)="textContainerMouseDown($event)"
+      [ngStyle]="{'margin-top': (annotation.offsetY) + 'px',
+                  'margin-left': (annotation.offsetX) + 'px'}">
+
+    <div class="chip">
+      {{ annotation.author | firstLetter }}
+    </div>
+
+    <i  (mousedown)="deleting=true"
+        (mouseup)="deleteAnnotation(annotation)" class="material-icons annotationDelete">delete</i>
+
+    <mat-form-field>
+      <textarea class="annotationTextInput" matInput matTextareaAutosize matAutosizeMaxRows="5"
+        [(ngModel)]="annotation.text" placeholder="Comment"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="createAnnotation(annotation)">Save</button>
+  </div>
+</div>

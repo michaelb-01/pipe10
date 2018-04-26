@@ -1,0 +1,71 @@
+<div class="annotationWrapper">
+  <div class="annotationContainer" #annotationContainer 
+    (mousedown)="containerMouseDown($event)"
+    (mousemove)="containerMouseMove($event)"
+    (mouseleave)="containerMouseLeave($event)"
+    (mouseup)="containerMouseUp($event)">
+
+    <!-- TEMP ANNOTATIONS -->
+
+    <div *ngFor="let annotation of annotations" class="annotation"
+      [ngStyle]="{'top': annotation.y + '%', 'left': annotation.x + '%'}"
+      (mousedown)="annotationMouseDown(annotation)"
+      (mouseup)="annotationMouseUp(annotation)">
+
+      <div class="line" [ngStyle]="{'width': annotation.lineLen + 'px', 'transform': 'rotate(' + annotation.lineRot + 'deg)'}"></div>
+
+      <div class="annotationText" 
+          (mousedown)="textContainerMouseDown($event,annotation)"
+          [ngStyle]="{'margin-top': (annotation.offsetY) + 'px',
+                      'margin-left': (annotation.offsetX) + 'px'}">
+
+        <div class="chip">{{ annotation.author | firstLetter }}</div>
+
+        <i  (mousedown)="deleting=true" (mouseup)="deleteTempAnnotation(annotation)" class="material-icons annotationDelete">delete</i>
+
+        <mat-form-field>
+          <textarea class="annotationTextInput" matInput matTextareaAutosize matAutosizeMaxRows="5"
+            [(ngModel)]="annotation.text" placeholder="Comment" (change)="annotationTextChange(annotation)"></textarea>
+        </mat-form-field>
+
+        <div class="annotationFooter">
+          {{annotation.date | amTimeAgo}}
+        </div>
+        <button mat-raised-button color="primary" (click)="createAnnotation(annotation)">Save</button>
+      </div>
+    </div>
+
+    <!-- SAVED ANNOTATIONS -->
+
+    <div *ngFor="let annotation of version?.comments">
+      <div *ngIf="_reviewService.frame == annotation.frame" class="annotation"
+            (mousedown)="annotationMouseDown(annotation)"
+            (mouseup)="annotationMouseUp(annotation)"
+            [ngStyle]="{'top': annotation.y + '%', 'left': annotation.x + '%'}">
+
+        <div class="line" [ngStyle]="{'width': annotation.lineLen + 'px', 'transform': 'rotate(' + annotation.lineRot + 'deg)'}"></div>
+
+        <div class="annotationText" 
+            (mousedown)="textContainerMouseDown($event,annotation)"
+            [ngStyle]="{'margin-top': (annotation.offsetY) + 'px',
+                        'margin-left': (annotation.offsetX) + 'px'}">
+
+          <div class="chip">{{ annotation.author | firstLetter }}</div>
+
+          <i  (mousedown)="deleting=true" (mouseup)="deleteAnnotation(annotation)" class="material-icons annotationDelete">delete</i>
+
+          <mat-form-field>
+            <textarea class="annotationTextInput" matInput matTextareaAutosize matAutosizeMaxRows="5"
+              [(ngModel)]="annotation.text" placeholder="Comment" (ngModelChange)="annotationTextChange(annotation)"></textarea>
+          </mat-form-field>
+
+          <div class="annotationFooter">
+            {{annotation.date | amTimeAgo}}
+          </div>
+          <!-- <button mat-raised-button color="primary" (click)="createAnnotation(annotation)">Save</button> -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

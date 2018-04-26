@@ -1,0 +1,155 @@
+<mat-sidenav-container class="container">
+  <mat-sidenav #sidenavRight class="sidenav2" align="end">
+    <app-task-form #taskForm></app-task-form>
+  </mat-sidenav>
+
+  <div class="detailsWrapper">
+<!--     <div class="detailsHeader" (click)="open = !open">
+      {{job?.name}} - Details
+      <button mat-button matSuffix mat-icon-button>
+        <mat-icon class="detailsHeaderButton" [ngClass]="{open: open}">keyboard_arrow_down</mat-icon>
+      </button>
+    </div> -->
+
+     <div id="detailsPanel" [ngClass]="{open: open}">
+      <ul id="breadcrumbs" class="light">
+          <li [routerLink]="['/job', job?._id._str]">{{job?.name}}</li>
+      </ul>
+
+      <div id="details">
+
+        <ul class="block jobInfo">
+          <li class="bold jobName">
+            {{job?.name}}
+          </li>
+          <li class="taskDescription">
+            {{job?.description}}
+          </li>
+        </ul>
+
+        <ul class="block cameraInfo">
+          <li class="bold">Camera</li>
+          <li class="cameraName">{{job?.camera.body}}</li>
+          <li class="filmback">{{job?.camera.sensor.width}} x {{job?.camera.sensor.height}}</li>
+        </ul>
+
+        <ul class="block outputInfo">
+          <li class="bold">Output</li>
+          <li>Length: 60/30/15</li>
+          <li>{{job?.output.width}}x{{job?.output.height}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="assignIcon">
+      <div class="assignView" (click)="showAssign = !showAssign">
+        <div class="assignViewIcon" [ngClass]="{showAssign: showAssign}">
+          <i class="material-icons" matTooltip='Task Assignment' [matTooltipPosition]="'after'">people</i>
+          <i class="material-icons" matTooltip='Cover View' [matTooltipPosition]="'after'">dashboard</i>
+        </div>
+      </div>
+    </div>
+
+    <mat-form-field class="filter">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput #searchQuery type="text" placeholder="Search" [(ngModel)]="filter"/>
+      <button mat-button *ngIf="filter" matSuffix mat-icon-button aria-label="Clear" (click)="filter=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="viewToggleIcons">
+      <div class="assignView" (click)="listView = !listView">
+        <div class="assignViewIcon" [ngClass]="{showAssign: listView}">
+          <i class="material-icons" matTooltip='Grid View' [matTooltipPosition]="'after'">view_module</i>
+          <i class="material-icons" matTooltip='List View' [matTooltipPosition]="'after'">list</i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p style="margin:8px 8px 0 8px;">Shots ( {{(shots | async)?.length}} )</p>
+
+  <div class="entities-container shots">
+    <div *ngFor="let entity of shots | async; let id = index;" class="entity" (click)="selectEntity(entity)">
+      <div class="entity-wrapper {{entity.status}}">
+        <div class="details-slider" [ngClass]="{open: showAssign}">
+          <!-- ENTITY COVER -->
+          <div class="entity-cover">
+            <app-thumbnail [thumbUrl]="entity.thumbUrl">
+              <div class="banner fade">
+                <a [routerLink]="['/entity', entity._id._str]">
+                  <h1 class="cardTitle">sh{{entity.name | zeroPad:4}}</h1>
+                  <h3 class="cardTag">{{entity.type}}</h3>
+                </a>
+              </div>
+            </app-thumbnail>
+          </div>
+          <!-- ENTITY DETAILS -->
+          <div class="entity-details {{entity.status}}">
+            <i class="material-icons task-add-button" (click)="addTask(entity)">add_circle_outline</i>
+            <a class="details-title bold" [routerLink]="['/entity', entity._id._str]">{{entity.name}}</a>
+            <ul class="task-list">
+              <li *ngFor="let task of entity.tasks; let taskId = index;" 
+                 (click)="selectTask($event, entity, task);"
+                 class="task-item {{task.status}}"
+                 [ngClass]="{selected: task.selected}">
+                <span class="type">{{task.type}} </span>
+                <div class="chips chips-small">
+                  <div *ngFor="let taskUser of task.users" class="chip" matTooltip={{taskUser}}>
+                    {{taskUser | firstLetter}}
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p style="margin:8px 8px 0 8px;">Assets ( {{(assets | async)?.length}} )</p>
+
+  <div class="entities-container assets">
+    <div *ngFor="let entity of assets | async; let id = index;" class="entity" (click)="selectEntity(entity)">
+      <div class="entity-wrapper {{entity.status}}">
+        <div class="details-slider" [ngClass]="{open: showAssign}">
+          <!-- ENTITY COVER -->
+          <div class="entity-cover">
+            <app-thumbnail [thumbUrl]="entity.thumbUrl">
+              <div class="banner fade">
+                <a [routerLink]="['/entity', entity._id._str]">
+                  <h1 class="cardTitle">{{entity.name}}</h1>
+                  <h3 class="cardTag">{{entity.type}}</h3>
+                </a>
+              </div>
+            </app-thumbnail>
+          </div>
+          <!-- ENTITY DETAILS -->
+          <div class="entity-details {{entity.status}}">
+            <i class="material-icons task-add-button" (click)="addTask(entity)">add_circle_outline</i>
+            <a class="details-title bold" [routerLink]="['/entity', entity._id._str]">{{entity.name}}</a>
+            <ul class="task-list">
+              <li *ngFor="let task of entity.tasks; let taskId = index;" 
+                 (click)="selectTask(entity, task);"
+                 class="task-item {{task.status}}"
+                 [ngClass]="{selected: task.selected}">
+                <span class="type">{{task.type}} </span>
+                <div class="chips chips-small">
+                  <div *ngFor="let taskUser of task.users" class="chip" matTooltip={{taskUser}}>
+                    {{taskUser | firstLetter}}
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</mat-sidenav-container>
+
+

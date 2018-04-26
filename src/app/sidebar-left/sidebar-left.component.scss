@@ -1,0 +1,119 @@
+.sidebarWrapper {
+  width: 250px;
+}
+
+.sidebarTitle {
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.entityWrapper {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+}
+
+.thumbWrapper, .dueDateWrapper {
+  flex: 1;
+}
+
+.dueDateWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .dueDate {
+    text-align: center;
+    .dueDateIn {
+      font-size: 10px;
+      color: #aaa;
+    }
+  }
+}
+
+.entityContainer {
+  .tasks {
+    display: flex;
+    justify-content: space-around;
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: max-height 0.1s; /* Safari */
+    transition: max-height 0.1s;
+    transition-delay: 0.2s;
+    border-bottom: 0px solid #ddd;
+  }
+  &:hover .tasks {
+    max-height: 30px;
+    //border-bottom: 1px solid #ddd;
+  }
+}
+
+$alpha: 0.2;
+
+.taskExtraItem {
+  flex: 1;
+  text-align: center;
+  line-height: 30px;
+  &.track:hover {
+    background: rgba(255,0,0,$alpha);
+  }
+  &.fx:hover {
+    background: rgba(255,0,0,$alpha);
+  }
+  &.light:hover {
+    background: rgba(255,255,0,$alpha);
+  }
+  &.render:hover {
+    background: rgba(0,0,255,$alpha);
+  }
+  &.model:hover {
+    background: rgba(0,255,0,$alpha);
+  }
+  &.texture:hover {
+    background: rgba(0,255,255,$alpha);
+  }
+  &.lookdev:hover {
+    background: rgba(255,0,255,$alpha);
+  }
+  &.comp:hover {
+    background: rgba(255,0,255,$alpha);
+  }
+}
+
+.banner {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: center;
+  -webkit-justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 200;
+  color: white;
+  a {
+    z-index: 10;
+    pointer-events: all;
+  }
+  & > * {
+    text-align: center;
+  }
+  &:hover {
+    opacity: 0;
+  }
+}
+
+.fade {
+  -moz-transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  background-color: rgba(0,0,0,0.5); 
+  &:hover {
+    background-color: rgba(0,0,0,0);  // 0% opacity black
+  }
+}

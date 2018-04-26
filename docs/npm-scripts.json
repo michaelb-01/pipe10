@@ -1,0 +1,6 @@
+    "meteor-update": "meteor-client bundle -s api",
+    "meteor-reset": "unset MONGO_URL && cd api && mongo meteor --eval 'db.dropDatabase()'",
+    "meteor": "unset MONGO_URL && cd api && meteor",
+    "meteor-server": "export MONGO_URL=mongodb://michaelb01:yellow01@ds013564.mlab.com:13564/pipe && cd api && meteor",
+    "electron": "webpack && cp src/electron/* dist && ./node_modules/.bin/electron dist",
+    "api": "cd api && meteor",

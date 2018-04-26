@@ -1,0 +1,27 @@
+.mediaContainer {
+  display: flex;
+  margin-right: 50px;
+}
+
+.mediaWrapper {
+  position: relative;
+}
+
+.mediaComments {
+  flex: 0 0 250px;
+  background-color: red;
+}
+
+.actionButtons {
+  position: absolute;
+  right: 0;
+  color: #aaa;
+  &:hover {
+    color: #ccc;
+  }
+  i {
+    font-size: 30px;
+    margin: 10px;
+    cursor: pointer;
+  }
+}

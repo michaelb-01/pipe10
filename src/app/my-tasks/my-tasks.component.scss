@@ -1,0 +1,197 @@
+// Variables
+//@import "variables";
+
+#container {
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+$header-height: 30px;
+$padding: 5px;
+$avatar: $header-height - ($padding*2);
+
+.card-outer {
+  width: 25%;
+  background-color: white;
+}
+
+.card-container {
+  padding: 5px;  
+}
+
+.card-wrapper {
+  box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.2);
+  & .card-header, .card-body {
+    padding: $padding;
+  }
+}
+
+.card-header {
+  position: relative;
+  height: $header-height;
+  .avatar {
+    position: absolute;
+    width: $header-height;
+    height: $header-height;
+    line-height: $header-height;
+    text-align: center;
+    background-color:pink;
+    border-radius: 50%;
+  }
+  .titleGroup {
+    position:absolute;
+    left: $header-height + ($padding*2);
+    .title, .subtitle {
+      line-height: 14px;
+    }
+  }
+}
+
+.card-image {
+  background-color: green;
+  //padding: 0px !important;
+}
+
+.card-footer {
+  width: 100%;
+}
+
+.todo-wrapper {
+  position: relative;
+  display: flex;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  &:hover {
+    background-color: #fff0f0;
+  }
+  &:after { 
+    content: '';
+    border-bottom: dashed 1px #ddd;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-left: -10px;
+    padding-right: 10px;
+  }
+}
+
+.card-body-header {
+  display: flex;
+  margin: 0 3px;
+  .todos-filter {
+    margin-right: 4px;
+    color: #ff4081;
+    &.todos-filtered {
+      color: #ccc;
+    }
+  }
+  .todos-slider-wrapper {
+    width:100%;
+    height: 3px;
+    background-color: #ccc;
+    margin-top: 10px;
+    flex: 1;
+    .todos-slider {
+      width:100%;
+      height: 100%;
+      background-color: #ff0078;
+      -webkit-transition: width 0.2s; /* For Safari 3.1 to 6.0 */
+      transition: width 0.2s;
+    }
+  }
+  .todos-counter {
+    line-height: 24px;
+    margin-left: 8px;
+  }
+}
+
+.card-footer {
+  position: relative;
+  padding-bottom: 5px;
+}
+
+textarea.mat-input-element {
+  resize: none;
+}
+
+.mat-form-field-infix {
+  padding: 4px 0;
+  border-top: 0;
+  width: auto !important;
+}
+
+.todo-label {
+  margin: 0 5px;
+  flex: 1;
+}
+
+.todo-label-input {
+  flex: 1;
+  margin: -14px 5px 0 5px;
+  font-size: 12px;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.todo-done {
+  text-decoration: line-through;
+  color: #999; 
+}
+
+.todo-icons > i {
+  border: 1px solid;
+  border-radius: 50%;
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+}
+
+.card-body {
+  cursor: pointer;
+}
+
+/deep/ .mat-checkbox-ripple {
+  display: none !important;
+}
+
+.icon-plus {
+  background-color: #ff4081;
+  border-radius: 12px;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  left: 50%;
+  margin-left: -12px;
+  cursor: pointer;
+  //box-shadow: -1px 1px 5px 0 #aaa;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  &:hover {
+    //box-shadow: -2px 2px 7px 0 #aaa;
+    box-shadow: 0 12px 20px rgba(0,0,0,0.25);
+  }
+}
+.icon-plus:after {
+  background-color: #fff;
+  width: 16px;
+  height: 2px;
+  position: absolute;
+  top: 11px;
+  left: 4px;
+  content: "";
+}
+.icon-plus:before {
+  background-color: #fff;
+  width: 2px;
+  height: 16px;
+  position: absolute;
+  top: 4px;
+  left: 11.5px;
+  content: "";
+}
+

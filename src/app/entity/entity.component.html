@@ -1,0 +1,62 @@
+<mat-sidenav-container class="container">
+  <mat-sidenav #sidenavRight class="sidenav2" align="end">
+    <app-version-form #versionForm></app-version-form>
+  </mat-sidenav>
+
+  <div id="detailsPanel">
+    <ul id="breadcrumbs" class="light">
+      <!--<li [routerLink]="['Job', {jobId:id}]">{{entity?.job.jobName}}</li>-->
+      <li [routerLink]="['/job', entity?.job?.jobId]">{{entity?.job?.jobName}}</li>
+      <i class="material-icons">navigate_next</i>
+      <li [routerLink]="['/entity', entity?._id?._str]">{{entity?.type=='shot' ? 'sh' : ''}}{{entity?.name | zeroPad:4}}</li>
+    </ul>
+
+    <!--
+    <div id="detailsToggle" (click)="toggleDetails(!showDetails)">
+      <div>
+        <span class="arrow" [ngClass]="{closed: showDetails}"></span>
+          Details
+        <span class="arrow" [ngClass]="{closed: showDetails}"></span>
+      </div>
+    </div>
+    -->
+
+    <div id="details">
+
+      <ul class="block jobInfo">
+        <li class="bold jobName">
+          {{entity?.type=='shot' ? 'sh' : ''}}{{entity?.name | zeroPad:4}}
+        </li>
+        <li class="taskDescription">
+          {{entity?.description}}
+        </li>
+      </ul>
+
+      <ul class="block workInfo">
+        <li class="bold">Frame Range</li>
+
+        <li class="workIn">Work In: &nbsp;&nbsp; 1001</li>
+        <li class="workOut">Work Out: 1070</li>
+        <li class="cutIn">Cut In: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1010</li>
+        <li class="cutOut">Cut Out: &nbsp;&nbsp; 1065</li>
+      </ul>
+
+      <ul class="block cameraInfo">
+        <li class="bold">Camera</li>
+
+        <li class="cameraName">Arri Alexa</li>
+        <li class="filmback">23.76 x 13.37mm</li>
+        <li class="focalLength">50mm</li>
+        <li class="extra">Extra info</li>
+      </ul>
+    </div>
+  </div>
+
+  <app-versions (onSelect)="onSelectVersion($event)">Loading Versions..</app-versions>
+</mat-sidenav-container>
+
+
+
+
+
+

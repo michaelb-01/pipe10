@@ -1,0 +1,9 @@
+<div class="handle start"
+  (mousedown)="handleStartDown($event)"></div>
+
+<div class="taskLabel noselect"
+  (mousedown)="taskMouseDown($event)">
+  {{task.name}}
+</div>
+
+<div class="handle end" (mousedown)="handleEndDown($event)"></div>

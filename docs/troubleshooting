@@ -1,0 +1,8 @@
+POSTCSS ERROR
+
+reinstall angular-cli:
+npm install angular-cli
+
+delete webpack.config.js and re-eject (follow steps on https://github.com/darkbasic/angularcli-meteor), you may have to temporarily delete npm scripts
+
+delete package-lock.json and node_modules, then npm install

@@ -1,0 +1,9 @@
+<mat-sidenav-container class="container">
+
+  <app-entities [job]=job (onSelectEntity)="onSelectEntity($event)"></app-entities>
+
+  <mat-sidenav #sidenavRight class="sidenav2" align="end">
+    <app-entity-form #entityForm></app-entity-form>
+  </mat-sidenav>
+
+</mat-sidenav-container>

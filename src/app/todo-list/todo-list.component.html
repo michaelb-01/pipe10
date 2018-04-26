@@ -1,0 +1,17 @@
+<ul>
+  <li *ngFor="let todo of entity.todos" class="todoItem">
+    <mat-checkbox [(ngModel)]="todo.done" (click)="updateTodo(todo)"></mat-checkbox>
+    <span [ngClass]="{'checked': todo.done}">{{todo.text}}</span>
+    <!-- <mat-input-container>
+      <input matInput [(ngModel)]="todo.text" autocomplete="off">
+    </mat-input-container> -->
+  </li>
+</ul>
+
+<!--  -->
+
+<form (submit)="createTodo()">
+  <mat-input-container>
+    <input matInput placeholder="Add Todo" [(ngModel)]="newTodo.text" name="text" autocomplete="off">
+  </mat-input-container>
+</form>

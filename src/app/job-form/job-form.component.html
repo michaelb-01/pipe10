@@ -1,0 +1,129 @@
+<form class="form-container" (ngSubmit)="onSubmit(jobForm)" #jobForm="ngForm">
+  <div class="form-wrapper">
+
+    <h1 class='form-title'>Create Job</h1>
+
+    <mat-tab-group>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <i class="material-icons">list</i>
+          </ng-template>
+
+<!--           <mat-form-field>
+            <input matInput placeholder="Client" [(ngModel)]="job.client" name="client" required=True>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field> -->
+
+          <mat-form-field>
+              <input matInput [matAutocomplete]="auto"
+                     placeholder="Clients"
+                     [(ngModel)]="job.client" name="client"
+                     (ngModelChange)="filterClients(job.client)"
+                     (click)="filterClients(job.client)"
+                     required=True>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let client of filteredClients" 
+              [value]="client.name">
+                {{ client.name }}
+            </mat-option>
+          </mat-autocomplete>
+                
+          <br>
+
+          <mat-form-field>
+            <input matInput placeholder="Agency" [(ngModel)]="job.agency" name="agency" required=True>
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field>
+            <input matInput placeholder="Job Name" [(ngModel)]="job.name" name="name" required=True>
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field>
+            <input matInput type="number" placeholder="Number of Shots" [(ngModel)]="numShots" name="numShots" value="20" min="1" max="300">
+          </mat-form-field>
+
+      </mat-tab>
+
+      <!-- OUTPUT -->
+      <mat-tab>
+          <ng-template mat-tab-label>
+            <i class="material-icons">exit_to_app</i>
+          </ng-template>
+
+          <!-- frame rate -->
+          <mat-form-field>
+            <mat-select placeholder="Frame Rate" [(ngModel)]="job.output.fps" name="fps">
+              <mat-option *ngFor="let frameRate of frameRates" [value]='frameRate'>
+                {{ frameRate }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- resolution -->
+          <mat-form-field>
+            <mat-select placeholder="Format" [(value)]='formats[1].name'>
+              <mat-option *ngFor="let format of formats" [value]="format.name">
+                {{ format.name }} <span class='formatDetails'>({{ format.width }} x {{ format.height }})</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- delivery date -->
+          <mat-form-field style="width: 180px;">
+            <input matInput [matDatepicker]="dueDate" placeholder="Delivery Date" [(ngModel)]="job.dueDate" name="dueDate">
+            <mat-datepicker-toggle matSuffix [for]="dueDate"></mat-datepicker-toggle>
+            <mat-datepicker #dueDate></mat-datepicker>
+          </mat-form-field>
+
+        </mat-tab>
+
+      <!-- CAMERA -->
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <i class="material-icons">photo_camera</i>
+        </ng-template>
+
+        <!-- resolution -->
+        <mat-form-field>
+          <mat-select placeholder="Format" [(value)]='formats[1].name'>
+            <mat-option *ngFor="let format of formats" [value]="format.name">
+              {{ format.name }} <span class='formatDetails'>({{ format.width }} x {{ format.height }})</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- camera -->
+        <mat-form-field>
+          <mat-select placeholder="Camera Brand" [(ngModel)]="job.camera.brand" name="cameraBrand">
+            <mat-option *ngFor="let camera of cameras" [value]="camera.names">
+              {{ camera.brand }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Camera Type" [(ngModel)]="job.camera.type" name="cameraType">
+            <mat-option *ngFor="let type of job.camera.brand" [value]="type">
+              {{ type }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </mat-tab>
+
+    </mat-tab-group>
+  </div>
+
+  <div class='submitButtonWrapper'>
+    <button mat-raised-button [disabled]="!jobForm.form.valid" color="primary" type="submit" class="submitButton">
+      Create Job
+    </button>
+  </div>
+</form>

@@ -1,0 +1,89 @@
+:host { 
+  width:100%;
+  height:100%;
+  display: table;
+  background-color: black;
+}
+.thumbnailContainer {
+  display:block;
+  width:100%;
+  height:0;
+  overflow:hidden;
+  position:relative;
+}
+.thumbnailWrapper {
+  position:absolute;
+  pointer-events:none;
+  height:100%;
+}
+.thumbnail {
+  background-repeat: no-repeat;
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+}
+img {
+  pointer-events:none;
+  width:auto;
+  max-width:100000px;
+}
+.bar {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background-color: red;
+  top: 0px;
+  pointer-events:none;
+}
+.fade {
+  position:absolute;
+  top:0;
+  left:0;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  opacity: 0.5;
+  transition: opacity 0.4s;
+}
+.fadeOut {
+  opacity: 0;
+}
+
+.banner {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: center;
+  -webkit-justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 200;
+  color: white;
+  //pointer-events: none;
+  //background-color: rgba(0,0,0,0.5);  // 50% opacity black
+  &.active {
+    background-color: transparent;
+  }
+  &.complete {
+    background-color: rgba(10,100,30,0.5);  // 50% opacity black
+  }
+  & > * {
+    text-align: center;
+  }
+  a {
+    z-index: 10;
+    pointer-events: all;
+  }
+  &:hover {
+    opacity: 0;
+  }
+}

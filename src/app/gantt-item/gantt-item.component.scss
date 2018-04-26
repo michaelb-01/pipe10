@@ -1,0 +1,44 @@
+:host {
+  z-index:1;
+  position: absolute;
+  background-color: #707e8c;
+  border-radius:3px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: left 0.2s, width 0.2s;
+  &.dragging {
+    transition: left 0s, width 0s;
+  }
+  .textLabel {
+    text-overflow: ellipsis;
+  }
+}
+
+.handle {
+  z-index: 2;
+  position: absolute;
+  top:0;
+  height: 100%;
+  width: 8px;
+  background-color:white;
+  border-radius:3px;
+  opacity:0.3;
+  transition:opacity 0.2s;
+  cursor:ew-resize;
+  &:hover {
+    opacity:1;
+  }
+  &.start {
+    left:0;
+  }
+  &.end {
+    right:0;
+  }
+}
+
+.taskLabel {
+  margin-left: 12px;
+}

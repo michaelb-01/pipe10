@@ -1,0 +1,46 @@
+<div class="filters">
+  Filters:  
+  <div class="menu 2d unselectable">
+    <div class="menuTitle" (click)="toggle2dFunc()">
+      <span class="menuStatus" [ngStyle]="{'background-color':status2d, 'box-shadow': '0 0 0 1px ' + toggle2d}"></span>
+      2D <i class="material-icons" style="vertical-align: middle; margin-top: -2px;">arrow_drop_down</i>
+    </div>
+    <ul class="menuList">
+      <li *ngFor="let type of types2d" class="menuItem unselectable" [ngClass]="{active: type.active}" 
+          (click)="toggleActive2d($event,type)">
+        {{type.value}}
+      </li>
+    </ul>
+  </div>
+
+  <div class="menu 3d unselectable">
+    <div class="menuTitle" (click)="toggle3dFunc()">
+      <span class="menuStatus" [ngStyle]="{'background-color':status3d, 'box-shadow': '0 0 0 1px ' + toggle3d}"></span>
+      3D <i class="material-icons" style="vertical-align: middle; margin-top: -2px;">arrow_drop_down</i>
+    </div>
+    <ul class="menuList">
+      <li *ngFor="let type of types3d" class="menuItem unselectable" [ngClass]="{active: type.active}" 
+          (click)="toggleActive3d($event,type)">
+        {{type.value}}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- <div *ngFor="let version of versions2 | typeFilter2">
+  {{version.name}}
+</div> -->
+
+<div id="versionsContainer">
+
+<!--   <div *ngFor="let version of versions | async">
+
+  </div>
+ -->
+  <app-version-item *ngFor="let version of versions | async | typeFilter2:types"
+              [version]="version"
+              [ngClass]="{selected: version.selected}"
+              (click)=selectVersion(version)>
+  </app-version-item>
+</div>
+

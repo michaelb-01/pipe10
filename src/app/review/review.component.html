@@ -1,0 +1,30 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav align="end" mode="side" class="example-sidenav">
+    Comment List
+  </mat-sidenav>
+
+  <div class="mediaContainer">
+
+    <div class="actionButtons">
+      <i class="material-icons" (click)="sidenav.open()">comment</i>
+    </div>
+
+    <div class="mediaWrapper">
+      <app-annotation *ngIf="!_reviewService.playing" [version]="version" (updateComment)="updateComment($event)"></app-annotation>
+      
+      <!-- <div *ngIf="version?.contentType == 'video'"> -->
+        <app-pipe-video  *ngIf="version" [version]="version" (updateComment)="updateComment($event)"></app-pipe-video>
+      <!-- </div> -->
+    </div>
+
+    <!-- <comment-list [version]="version"></comment-list> -->
+  </div>
+
+</mat-sidenav-container>
+
+<!--     <div class="commentMarkerContainer">
+      <div *ngFor="let comment of version?.comments"
+          class="commentMarker"
+          [ngStyle]="{'left': 100*((comment.frame-1) / (this.numFrames-1)) + '%'}">
+      </div>
+    </div> -->

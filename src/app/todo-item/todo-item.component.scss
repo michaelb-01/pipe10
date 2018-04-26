@@ -1,0 +1,26 @@
+.todo-wrapper {
+  display: flex;
+  margin: 5px;
+  .todo-label {
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  .todo-label-input {
+    flex: 1;
+    margin: -10px 5px 0 5px;
+  }
+}
+
+textarea.mat-input-element {
+  resize: none;
+}
+
+.todo-icons > i {
+  border: 1px solid;
+  border-radius: 50%;
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+}

@@ -1,0 +1,29 @@
+.form-container {
+  width: 250px;
+  .form-wrapper {
+    margin: 30px;
+    min-height: 260px;
+    .form-title {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.formatDetails {
+  position: absolute;
+  right: 16px;
+}
+
+.submitButtonWrapper {
+  display: flex;
+  margin: 15px 30px;
+  .submitButton {
+    flex: 1;
+  }
+}
+
+// user chips
+.user-chip-close {
+  font-size: 14px;
+  vertical-align: middle;
+}

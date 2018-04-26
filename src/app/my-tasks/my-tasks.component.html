@@ -1,0 +1,85 @@
+<div id="container">
+
+  <div class="card-outer" *ngFor="let task of tasks | async; let i = index">
+    <div class="card-container">
+      <div class="card-wrapper">
+        <div class='card-header'>
+          <div class='avatar initials'>
+            MB
+          </div>
+          <div class='titleGroup'>
+            <div class='title bold'>{{task?.type}}</div>
+            <a [routerLink]="['/entity', task.entity.entityId._str]">
+              <div class='subtitle'>{{task?.entity.entityName}}</div>
+            </a>
+          </div>
+        </div>
+        
+        <div class='card-image'>
+          <app-thumbnail [thumbUrl]="task.thumbUrl">
+          </app-thumbnail>
+        </div>
+
+        <div appSortable class='card-body'>
+          <div class='card-body-header'>
+            <i class="material-icons todos-filter" 
+              (click)="filterTodos(task)"
+              [ngClass]="{'todos-filtered': task.filterTodos==true}">
+                filter_list
+            </i>
+            <!-- <mat-slider min="0" [max]="task.todos.length" [value]="task.todosDone"></mat-slider> -->
+            <div class="todos-slider-wrapper">
+              <div class="todos-slider" [style.width.%]="100 * task.todosDone / task.todos.length"></div>
+            </div>
+            <div class="todos-counter">
+              {{task.todosDone}} / {{task.todos.length}}
+            </div>
+          </div>
+
+          <div *ngFor="let todo of task.todos | todosFilter:task.filterTodos" class="todo-wrapper">
+            <mat-checkbox 
+              [checked]="todo.done" 
+              (change)="toggleTodo(task,todo)" 
+              [(ngModel)]="todo.done">
+            </mat-checkbox>
+
+            <div *ngIf="!todo.editing && todo.text!=''" 
+                class="todo-label" 
+                [ngClass]="{'todo-done': todo.done==true}"
+                (mouseup)="todo.editing = !todo.editing; todoInput = todo.text">
+              {{todo.text}}
+            </div>
+
+            <div *ngIf="todo.editing || todo.text==''" class="todo-label-input">
+              <mat-form-field >
+                <textarea matInput [(ngModel)]="todoInput" name="text" class="todo-label-textarea" matTextareaAutosize></textarea>
+              </mat-form-field>
+
+              <div class="todo-icons">
+                <i class="material-icons todo-save" (click)="updateTodo(todo,task)">done</i>
+                <i class="material-icons todo-delete" (click)="deleteTodo(todo,task)">delete</i>
+              </div>
+            </div>
+          </div>
+
+<!--           <app-todo-item *ngFor="let todo of task.todos" [todo]="todo" (updateTodo)="updateTodo($event,task)">
+          </app-todo-item> -->
+
+
+        </div>
+
+        <table class='card-footer'>
+          <!-- <i class="material-icons addTodo" (click)="addTodo(task)">add_circle</i> -->
+          <div class="icon-plus" (click)="createTodo(task)"></div>
+<!--           <tr>
+            <td class="date">{{card?.date | date: 'dd/MM/yyyy'}}</td>
+            <td align="right" class="notes_num" (click)="toggleNotes(card)">
+              {{card?.notes?.length}} notes
+            </td>
+          </tr> -->
+        </table>
+      </div>
+    </div>  
+  </div>
+
+</div>

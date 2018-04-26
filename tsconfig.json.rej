@@ -1,0 +1,52 @@
+***************
+*** 3,13 ****
+    "compilerOptions": {
+      "outDir": "./dist/out-tsc",
+      "sourceMap": true,
+      "declaration": false,
+      "moduleResolution": "node",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "target": "es5",
+      "typeRoots": [
+        "node_modules/@types"
+      ],
+--- 3,18 ----
+    "compilerOptions": {
+      "outDir": "./dist/out-tsc",
+      "sourceMap": true,
++     "baseUrl": ".",
+      "declaration": false,
++     "module": "commonjs",
+      "moduleResolution": "node",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "target": "es5",
++     "skipLibCheck": true,
++     "stripInternal": true,
++     "noImplicitAny": false,
+      "typeRoots": [
+        "node_modules/@types"
+      ],
+***************
+*** 15,19 ****
+        "es2017",
+        "dom"
+      ]
+-   }
+  }
+--- 26,39 ----
+        "es2017",
+        "dom"
+      ]
++   },
++   "include": [
++     "src/**/*.ts",
++     "api/**/*.ts"
++   ],
++   "exclude": [
++     "node_modules",
++     "api/node_modules",
++     "api"
++   ]
+  }

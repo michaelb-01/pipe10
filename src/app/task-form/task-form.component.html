@@ -1,0 +1,54 @@
+<form class="form-container" (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+  <div class="form-wrapper">
+
+    <h1>{{formTitle}}</h1>
+    <h2 class='form-title'>{{entity.name}}</h2>
+
+    <mat-form-field>
+      <mat-select placeholder="Type" [(ngModel)]="task.type" name="type" required=True>
+        <mat-option *ngFor="let task of tasks" [value]="task.value">
+          {{ task.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Status" class="fullWidth" [(ngModel)]='task.status' name="status">
+        <mat-option *ngFor="let status of statuses" [value]="status.value">
+          {{ status.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-input-container class="fullWidth">
+      <input #userQuery
+              matInput 
+              placeholder="Assign Artists" 
+              [matAutocomplete]="auto" 
+              [formControl]="userCtrl">
+    </mat-input-container>
+
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let user of filteredUsers | async" 
+        [value]="user" 
+        (onSelectionChange)="addUser(user)">
+          {{ user.profile.name }}
+      </mat-option>
+    </mat-autocomplete>
+
+    <ul class="user-list">
+      <li class="user-chip" *ngFor="let user of selectedUsers">
+        {{ user.profile.name }}
+        <i class="material-icons user-chip-close" (click)=removeUser(user)>close</i>
+      </li>
+    </ul>   
+
+    <div class='submitButtonWrapper'>
+      <button mat-raised-button [disabled]="!task.type" color="primary" type="submit" class="submitButton">
+        {{formTitle}}
+      </button>
+    </div>
+
+
+  </div>
+</form>

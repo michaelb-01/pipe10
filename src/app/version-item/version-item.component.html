@@ -1,0 +1,29 @@
+<div class="version-container">
+  <div class="version-wrapper">
+    <div class='version-header'>
+      <div class='avatar initials'>
+        MB
+      </div>
+      <div class='titleGroup'>
+        <div class='title bold'>{{version?.type}}</div>
+        <a [routerLink]="['/review', version._id._str]">
+          <div class='subtitle'>v{{version?.version}}</div>
+        </a>
+      </div>
+    </div>
+
+    <div class='version-image'>
+      <app-thumbnail [thumbUrl]="version.thumbUrl">
+      </app-thumbnail>
+    </div>
+
+    <table class='version-footer'>
+      <tr>
+        <td class="date">{{version?.date | date: 'dd/MM/yyyy'}}</td>
+        <td align="right" class="notes_num">
+          {{version?.notes?.length}} notes
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

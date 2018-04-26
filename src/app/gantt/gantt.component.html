@@ -1,0 +1,34 @@
+<div #container class="container">
+  <div class="header">
+    <div *ngFor="let month of months" class="monthLabel">
+      {{month.name}}
+      <div class="daysList">
+        <div *ngFor="let day of month.days; let i = index" class="cell column" [style.min-width]="cellWidth+'px'">
+          <div class="verticalLine"></div>
+          {{cal.dayNamesShort[(i+month.startIndex)%7]}}
+
+          {{day}}
+        </div>
+<!--         <div *ngFor="let day of month.days; let i = index" class="cell dayLabel" [style.min-width]="cellWidth+'px'">
+          <div class="verticalLine"></div>
+          {{cal.dayNamesShort[(i+month.startIndex)%7]}}
+
+          {{day}}
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let user of usersObs | async" class="userRow">
+    <div class="user">
+      <div class="userInner">
+        {{user.name}}
+      </div>
+    </div>
+    <div class="jobRow">
+      <app-gantt-item *ngFor="let job of user.jobs" [task]="job" [cellWidth]="cellWidth" [containerBbox]="containerBbox" (mouseDown)="setMouseMoveListener($event)">
+        {{job.name}}
+      </app-gantt-item>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+***************
+*** 10,14 ****
+        "jasminewd2",
+        "node"
+      ]
+-   }
+  }
+--- 10,17 ----
+        "jasminewd2",
+        "node"
+      ]
++   },
++   "exclude": [
++     "../api/node_modules"
++   ]
+  }
